@@ -1,0 +1,35 @@
+.container {
+    align-items: center;
+    background: rgba(255, 255, 255, .3);
+    color: white;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    height: 200px;
+    justify-content: space-around;
+    max-width: 400px;
+}
+
+.subcontainers {
+    max-height: 150px;
+    min-height: 150px;
+}
+
+.temp {
+    font-size: 90px;
+    letter-spacing: -8px;
+}
+
+.description {
+    background: rgba(0, 0, 0, .4);
+    border-radius: 15px;
+    padding: 4px 20px;
+    text-transform: uppercase;
+}
+
+.icon-container {
+    min-width: 115px;
+}
+
+.icon {
+    width: 100%;
+}
