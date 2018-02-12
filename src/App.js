@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { ForecastWeather } from "./components/ForecastWeather";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      weather: null
+    };
+  }
   componentDidMount() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -10,10 +17,10 @@ class App extends Component {
         console.log(latitude, longitude);
 
         fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&lang=fr&APPID=1b115102576423b5d8af1d59cc3285d9`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=fr&units=metric&APPID=1b115102576423b5d8af1d59cc3285d9`
         )
           .then(res => res.json())
-          .then(data => console.log("meteo", data))
+          .then(weather => this.setState({ weather }))
           .catch(err => console.log("error", err));
       });
     } else {
@@ -28,6 +35,7 @@ class App extends Component {
           width={32}
           height={32}
         />
+        {this.state.weather && <ForecastWeather weather={this.state.weather} />}
       </div>
     );
   }
