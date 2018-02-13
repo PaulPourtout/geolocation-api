@@ -2,12 +2,21 @@
   text-align: center;
   height: 100vh;
   display: flex;
-  align-items: flex-end;
+  justify-content: space-between;
+  /* align-items: flex-end; */
+  flex-direction: column;
+}
+
+.location-infos {
+  align-self: flex-start;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 0 0 1rem 0;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .weather-infos {
   display: flex;
-  flex: 1;
-  background: rgba(255, 255, 255, 0.3);
   flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.3);
 }

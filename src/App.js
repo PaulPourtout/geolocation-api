@@ -62,11 +62,18 @@ class App extends Component {
       };
     }
 
+    console.log(this.state.data);
+
     return (
       <React.Fragment>
         {visibility === "hidden" ? <Loader /> : null}
         {data && data.list && data.list[0] ? (
           <div className="App" style={appStyle}>
+            <div className="location-infos">
+              <h3>City: {this.state.data.city.name}</h3>
+              <p>latitude: {this.state.data.city.coord.lat.toFixed(2)}</p>
+              <p>Longitude: {this.state.data.city.coord.lon.toFixed(2)}</p>
+            </div>
             <div className="weather-infos">
               <CurrentWeather data={data.list[0]} />
               <ForecastWeather data={data} weatherHour={"09:00:00"} />
