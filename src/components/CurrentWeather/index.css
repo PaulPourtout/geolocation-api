@@ -1,12 +1,12 @@
 .container {
     align-items: center;
-    background: rgba(255, 255, 255, .3);
     color: white;
     display: flex;
     font-family: 'Roboto', sans-serif;
     height: 200px;
     justify-content: space-around;
     max-width: 400px;
+    padding: 15px 40px;
 }
 
 .subcontainers {

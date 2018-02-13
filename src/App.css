@@ -1,11 +1,21 @@
-body {
-  background-color: #0044aa;
+.App {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.weather-infos {
+  display: flex;
+  flex: 1;
+  background: rgba(255, 255, 255, .3);
 }
 
 .forecast {
   display: flex;
   flex-direction: row;
   color: #fff;
+  flex: 1;
 }
 
 .single-forecast {
