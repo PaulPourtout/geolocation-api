@@ -25,10 +25,10 @@ class App extends Component {
       navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
         this.getWeather(latitude, longitude);
-      });
-    } else {
-      alert("no geoloc");
-    }
+      },
+      (err) => alert(`Geolocation doesn't allow ${err.message}`),
+      {enableHighAccuracy: false, timeout: Infinity, maximumAge: 0})
+    };
   };
 
   getWeather = (latitude, longitude) => {
