@@ -2,17 +2,18 @@ import React, { Component } from "react";
 // css
 import "./App.css";
 // components
-import CurrentWeather from "./components/CurrentWeather/CurrentWeather"
-import { ForecastWeather } from "./components/ForecastWeather";
-import Loader from "./components/Loader/Loader"
+import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
+import { ForecastWeather } from "./components/ForecastWeather/ForecastWeather";
+import Loader from "./components/Loader/Loader";
+
 // CONST
 const KEY = "1b115102576423b5d8af1d59cc3285d9";
 
 class App extends Component {
   state = {
     data: null,
-    visibility: 'hidden',
-  }
+    visibility: "hidden"
+  };
 
   componentDidMount() {
     this.getLocationAndWeather();
@@ -21,30 +22,30 @@ class App extends Component {
 
   getLocationAndWeather = () => {
     if ("geolocation" in navigator) {
-       navigator.geolocation.getCurrentPosition(position => {
+      navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
-        this.getWeather(latitude, longitude)
+        this.getWeather(latitude, longitude);
       });
     } else {
       alert("no geoloc");
     }
-  }
+  };
 
   getWeather = (latitude, longitude) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=fr&units=metric&APPID=${KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=en&units=metric&APPID=${KEY}`
     )
       .then(res => res.json())
       .then(data => this.setState({ data }))
       .catch(err => console.log("error", err));
-  }
+  };
 
   // set a timeout to be sure to let the time to fetch the image and throw it in one shot
   renderWeatherComponent = () => {
-    setTimeout(() => {
-      this.setState({ visibility: 'visible' })
-    }, 8000)
-  }
+    // setTimeout(() => {
+    this.setState({ visibility: "visible" });
+    // }, 8000);
+  };
 
   render() {
     const { data, visibility } = this.state;
@@ -53,27 +54,27 @@ class App extends Component {
     if (data && data.list[0]) {
       const currentWeather = data.list[0];
       appStyle = {
-        background: `url('https://source.unsplash.com/featured/?weather/${currentWeather.weather[0].description}') no-repeat`,
-        backgroundSize: 'cover',
-        visibility: `${visibility}`,
-      }
-    };
+        background: `url('https://source.unsplash.com/featured/?weather/${
+          currentWeather.weather[0].description
+        }') no-repeat`,
+        backgroundSize: "cover",
+        visibility: `${visibility}`
+      };
+    }
 
     return (
       <React.Fragment>
-          {visibility === 'hidden' ? 
-            <Loader /> : null
-          }
-          {data && data.list && data.list[0] ? (
-            <div className="App" style={appStyle}>
-              <div className="weather-infos">
-                <CurrentWeather data={data.list[0]} />
-                <ForecastWeather weather={data} />
-              </div>
+        {visibility === "hidden" ? <Loader /> : null}
+        {data && data.list && data.list[0] ? (
+          <div className="App" style={appStyle}>
+            <div className="weather-infos">
+              <CurrentWeather data={data.list[0]} />
+              <ForecastWeather data={data} weatherHour={"09:00:00"} />
             </div>
-          ) : null}
+          </div>
+        ) : null}
       </React.Fragment>
-    )
+    );
   }
 }
 
