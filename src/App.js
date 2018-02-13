@@ -42,6 +42,7 @@ class App extends Component {
 
   render() {
     const { data, visibility } = this.state;
+
     // inline style object because need dynamic properties' value based on state
     let appStyle = {
       backgroundImage: `url('${bg}')`,
