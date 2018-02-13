@@ -4,7 +4,6 @@ import "./App.css";
 // components
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import { ForecastWeather } from "./components/ForecastWeather/ForecastWeather";
-import Loader from "./components/Loader/Loader";
 import Map from "./components/Map/Map";
 import bg from "./static/bg.jpg";
 
@@ -17,31 +16,23 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getLocationAndWeather();
+    /* San Fransisco coords :
+        Latitude: 37.774929
+        Longitude: -122.419416
+        */
   }
 
-  getLocationAndWeather = () => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        this.getWeather(latitude, longitude);
-      });
-    } else {
-      alert("no geoloc");
-    }
+  getWeather = (latitude, longitude) => {
+    /** Fetch weather from API */
+    /**API url: https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=en&units=metric&APPID=${KEY} */
   };
 
-  getWeather = (latitude, longitude) => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=en&units=metric&APPID=${KEY}`
-    )
-      .then(res => res.json())
-      .then(data => this.setState({ data }))
-      .catch(err => console.log("error", err));
+  getLocationAndWeather = () => {
+    /** Geolocation code goes here ! */
   };
 
   render() {
-    const { data, visibility } = this.state;
+    const { data } = this.state;
     // inline style object because need dynamic properties' value based on state
     let appStyle = {
       backgroundImage: `url('${bg}')`,
