@@ -9,5 +9,7 @@ export const replaceIcon = (oldIcon) => {
         return "clouds";
     } else if (regexSnow.test(oldIcon)) {
         return "snow";
-    };
+    } else {
+        return "rain";
+    }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { SingleDayWeather } from "./SingleDayWeather";
+import SingleDayWeather from "./SingleDayWeather";
 import { dateUtils } from "../utilsP/dateUtils";
 
 export const ForecastWeather = props => {
@@ -11,19 +11,16 @@ export const ForecastWeather = props => {
     }
   });
 
-  console.log("filtered", filtered);
-
   return (
     <div className="forecast">
       {filtered.map((item, index) => {
         const date = dateUtils.getDayOfWeek(item.dt);
-        console.log("date", date);
         return (
           <SingleDayWeather
             key={index}
             day={date}
             icon={item.weather[0].icon}
-            temp={item.main.temp}
+            temp={Math.floor(item.main.temp)}
             description={item.weather[0].description}
           />
         );
