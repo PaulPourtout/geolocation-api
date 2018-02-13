@@ -35,14 +35,9 @@ class App extends Component {
       `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=fr&units=metric&APPID=${KEY}`
     )
       .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        this.setState({ data })
-      })
+      .then(data => this.setState({ data }))
       .catch(err => console.log("error", err));
   }
-
- 
 
   // set a timeout to be sure to let the time to fetch the image and throw it in one shot
   renderWeatherComponent = () => {
