@@ -5,6 +5,8 @@ import "./App.css";
 import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import { ForecastWeather } from "./components/ForecastWeather/ForecastWeather";
 import Loader from "./components/Loader/Loader";
+import Map from "./components/Map/Map";
+
 
 // CONST
 const KEY = "1b115102576423b5d8af1d59cc3285d9";
@@ -62,19 +64,30 @@ class App extends Component {
       };
     }
 
-    console.log(this.state.data);
-
     return (
       <React.Fragment>
         {visibility === "hidden" ? <Loader /> : null}
         {data && data.list && data.list[0] ? (
           <div className="App" style={appStyle}>
-            <div className="location-infos">
-              <h3>City: {this.state.data.city.name}</h3>
-              <p>latitude: {this.state.data.city.coord.lat.toFixed(2)}</p>
-              <p>Longitude: {this.state.data.city.coord.lon.toFixed(2)}</p>
+            <div className="header">
+              <div className="location-infos">
+                <h3>City: {data.city.name}</h3>
+                <p>latitude: {data.city.coord.lat.toFixed(2)}</p>
+                <p>Longitude: {data.city.coord.lon.toFixed(2)}</p>
+              </div>
+              <div className="container-map">
+                <Map
+                  latitude={data.city.coord.lat}
+                  longitude={data.city.coord.lon}                    
+                  isMarkerShown 
+                  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={<div style={{ height: `190px` }} />}
+                  mapElement={<div style={{ height: `100%` }} />}
+                />
+              </div>
             </div>
-            <div className="weather-infos">
+              <div className="weather-infos">
               <CurrentWeather data={data.list[0]} />
               <ForecastWeather data={data} weatherHour={"09:00:00"} />
             </div>

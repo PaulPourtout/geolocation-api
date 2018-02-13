@@ -7,12 +7,22 @@
   flex-direction: column;
 }
 
+.header {
+  display:  flex;
+  justify-content: space-between;
+}
+
+.container-map {
+  flex: 0.5;
+}
+
 .location-infos {
   align-self: flex-start;
   color: #fff;
   padding: 2rem;
   border-radius: 0 0 1rem 0;
   background: rgba(0, 0, 0, 0.3);
+  flex: 0.3;
 }
 
 .weather-infos {
