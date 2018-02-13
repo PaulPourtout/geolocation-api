@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import "./index.css";
 // component
 import Icon from "../Icon/Icon";
-// utils
+// utils 
+import { dateUtils } from "../../utils/dateUtils";
 import { replaceIcon } from "../../utils/replaceIcon";
 
 export default class CurrentWeather extends React.Component {
@@ -26,18 +27,20 @@ export default class CurrentWeather extends React.Component {
 
   render() {
     const { data } = this.props;
+    const date = dateUtils.getDayOfWeek(this.props.data.dt);
     return (
       <main className="container">
         <div className="subcontainers">
           <div className="temp">{Math.floor(data.main.temp)}°</div>
           <div>
-            <span className="description">{data.weather[0].description}</span>
+            <span className="date">{date}</span>
           </div>
         </div>
         <div className="subcontainers">
           <div className="icon-container">
             <Icon icon={this.state.icon} />
           </div>
+          <span>{data.weather[0].description}</span>
         </div>
       </main>
     );
