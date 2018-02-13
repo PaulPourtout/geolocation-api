@@ -54,7 +54,7 @@ class App extends Component {
     if (data && data.list[0]) {
       const currentWeather = data.list[0];
       appStyle = {
-        background: `url('https://source.unsplash.com/featured/?weather/${
+        background: `url('https://source.unsplash.com/featured/?weather,${
           currentWeather.weather[0].description
         }') no-repeat`,
         backgroundSize: "cover",
